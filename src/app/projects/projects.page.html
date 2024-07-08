@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg">
+  <section class="section-timeline">
+    <div class="container">
+      <ul class="timeline">
+        <li #timelineItem
+            *ngFor="let item of timelineItems.slice().reverse(); let i = index"
+            [class]="getStatusClass(item) + (item.highlight ? ' highlight' : '')"
+            [attr.data-index]="i + 1"
+            [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}"
+            [ngStyle]="{'top': (i * 142) + 'px'}"
+            (click)="toggleItem(item)">
+          <div [ngClass]="{'animate-slideIn': item.animate}">
+            <div class="content"
+                 [class]="i % 2 === 0 ? 'arrow-left' : 'arrow-right'"
+                 [ngStyle]="{'background-color': getItemColor(item.status)}">
+              <p [ngStyle]="{'color': item.status == 'completed' ? '#fff' : ''}">{{item.title}} - {{item.status}}</p>
+              <ion-button *ngIf="item.status == 'notstarted'" (click)="openActivity(item)">Start</ion-button>
+              <ion-button *ngIf="item.status == 'inprogress'" (click)="openActivity(item)">Continue</ion-button>
+              <ion-button *ngIf="item.status == 'completed'" (click)="openActivity(item)">View</ion-button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble"></app-avatar>
+</ion-content>

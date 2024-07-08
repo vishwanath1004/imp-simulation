@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg">
+  <h4 style="color: black;
+  margin: 15px 15px;
+  background: #ffffff91;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;">Please select sub domain</h4>
+  <ion-card *ngFor="let domain of data" (click)="onSelect(domain?.id)">
+    <ion-card-header>
+      <ion-card-title>{{ domain?.title }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble"></app-avatar>
+</ion-content>

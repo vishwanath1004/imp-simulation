@@ -1,0 +1,48 @@
+
+
+// charcter animation
+
+.character {
+    width: 50px;
+    position: fixed;
+    bottom: 40px;
+    right: 0;
+  //   transform: translateX(-50%);
+    transition: bottom 1s, left 1s;
+  }
+   
+  
+  
+    // speech bubble 
+  .speech-bubble {
+      position: fixed;
+      bottom: 116px;
+      right: 130px;
+      width: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #333;
+      z-index: 1000;
+      background: linear-gradient(135deg, #f0f0f0, #ffffff);
+      border: 1px solid #ddd;
+    }
+    
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 20px; 
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 20px solid #fff;
+      border-top-color: #fff;
+      clear: both;
+    }
+  

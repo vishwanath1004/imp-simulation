@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg">
+<ion-img  src="{{item?.inprogressImage}}" *ngIf="item?.status != 'completed'"  style="margin: 10% 10px 10px 10px;
+border-radius: 16px;
+width: 94%;"/>
+<div  *ngIf="item?.status != 'completed'" style="text-align: center; height: 100px; margin-top: 40px;" >
+Activity going on...
+  </div>
+  <!-- <div  *ngIf="item?.status == 'completed'" style="text-align: center; height: 100px; margin-top: 40px;" >
+    Before vs After
+      </div> -->
+<ion-img *ngIf="item?.status == 'completed'"  style="margin: 10px 10px 10px 10px;
+border-radius: 16px;
+width: 94%;" src="{{item?.completedImage}}" />
+</ion-content>
+<ion-footer>
+  <ion-button size="block"  (click)="complete()" *ngIf="item?.status != 'completed'">
+    Mark as complete
+    </ion-button>
+    <ion-button size="block"  (click)="dismiss()" *ngIf="item?.status == 'completed'">
+    Done
+      </ion-button>
+  </ion-footer>

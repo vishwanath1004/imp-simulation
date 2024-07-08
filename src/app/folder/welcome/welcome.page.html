@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="danger"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg">
+  <ion-card *ngIf="askName" style="margin: 35% 15px; padding: 15px; background-color: #fff;">
+    <ion-label>Please enter your name.</ion-label>
+    <ion-input
+      style="border-bottom: 1px solid #eee; margin: 10px 0px;"
+      type="text"
+      placeholder="Enter your name here."
+      [(ngModel)]="profileName"
+      (ionInput)="onNameInput($event)"
+    ></ion-input>
+    <div style="display: flex; justify-content: right;">
+      <ion-button (click)="updateName()" [disabled]="!isNameValid">
+        <ion-icon
+          name="arrow-forward-outline"
+          [class.animate-arrow]="isNameValid"
+        ></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
+    <div *ngIf="!askName  && !selected">
+      <ion-card style="margin: 35% 15px;
+      padding: 15px; background-color: #fff;">
+        <h1 style="text-align: center;"> Do you want to know about micro-improvement approach?
+        </h1>
+        <ion-button (click)="onSelect('yes')" style="margin-top: 100px;" size="block">
+          yes, I am intrested
+        </ion-button>
+        <ion-button (click)="onSelect('no')" size="block">
+          No, Continue
+        </ion-button>
+        </ion-card>
+      </div>
+      <ion-card  *ngIf="selected" style="margin: 35% 15px;
+      padding: 15px; background-color: #fff;">
+        <h1 style="text-align: center;">micro-improvement approach
+        </h1>
+        </ion-card>
+<div  *ngIf="showSpeechBubble" >
+  <app-avatar [speechText]="speechText" (completed)="talkOver()"></app-avatar>
+  </div>
+
+</ion-content>

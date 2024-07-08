@@ -1,0 +1,13 @@
+
+@keyframes bounce {
+    0%, 100% {
+      transform: translateX(5px);
+    }
+    50% {
+      transform: translateX(-5px);
+    }
+  }
+  
+  .animate-arrow {
+    animation: bounce 0.8s infinite;
+  }

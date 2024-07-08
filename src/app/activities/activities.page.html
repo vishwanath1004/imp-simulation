@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg">
+  <h2 style="text-align: center;"> Activities</h2>
+ <ion-card *ngFor="let activity of activities"  style="  padding: 15px;" (click)="presentModal(activity)"  [ngClass]="{ 
+  'inprogress-border': activity.status == 'inprogress', 
+  'completed-border': activity.status == 'completed', 
+  'highlight': activity.highlight 
+}">
+<ion-card-title style="position: relative;">  
+ <div style="width: 90%; font-size: 16px;"> {{activity.title}} </div>
+<ion-icon  *ngIf="activity?.status === 'completed'" name="checkmark-circle" role="img" class="md hydrated" style="
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 40px;
+    color: green;
+">
+</ion-icon>
+
+</ion-card-title>
+</ion-card>
+
+
+<div *ngIf="showCongrats">
+ <app-celebration></app-celebration>
+  </div>
+  <app-avatar  [speechText]="speechText"></app-avatar>
+</ion-content>

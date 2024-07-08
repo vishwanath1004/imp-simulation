@@ -1,0 +1,8 @@
+<img src="../../assets/images/character.gif"  style="    width: 150px;
+position: fixed;
+bottom: 60px;
+z-index: 9;
+right: 0;" *ngIf="showSpeechBubble"/>
+ <div class="speech-bubble" *ngIf="showSpeechBubble && speechText">
+  <p appTypingAnimation [text]="speechText" [duration]="speechDuration">{{ speechText }}</p>
+</div>
