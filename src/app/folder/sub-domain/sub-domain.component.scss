@@ -1,0 +1,14 @@
+.cat-card:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    background-color: #2979FF;
+    cursor: pointer;
+  }
+
+  .subDomain{
+    color: black;
+  margin: 15px 15px;
+  background: #ffffff91;
+  padding: 10px;
+  border-radius: 8px;
+  }

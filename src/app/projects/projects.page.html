@@ -7,29 +7,37 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="bg">
-  <section class="section-timeline">
-    <div class="container">
-      <ul class="timeline">
-        <li #timelineItem
-            *ngFor="let item of timelineItems.slice().reverse(); let i = index"
-            [class]="getStatusClass(item) + (item.highlight ? ' highlight' : '')"
-            [attr.data-index]="i + 1"
-            [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}"
-            [ngStyle]="{'top': (i * 142) + 'px'}"
-            (click)="toggleItem(item)">
-          <div [ngClass]="{'animate-slideIn': item.animate}">
-            <div class="content"
-                 [class]="i % 2 === 0 ? 'arrow-left' : 'arrow-right'"
-                 [ngStyle]="{'background-color': getItemColor(item.status)}">
-              <p [ngStyle]="{'color': item.status == 'completed' ? '#fff' : ''}">{{item.title}} - {{item.status}}</p>
-              <ion-button *ngIf="item.status == 'notstarted'" (click)="openActivity(item)">Start</ion-button>
-              <ion-button *ngIf="item.status == 'inprogress'" (click)="openActivity(item)">Continue</ion-button>
-              <ion-button *ngIf="item.status == 'completed'" (click)="openActivity(item)">View</ion-button>
-            </div>
+  <!-- -->
+  <app-celebration *ngIf="completed == timelineItems?.length"  [message]="'You sorted all the  improvement projects.'">
+    </app-celebration>
+  <div class="topbar">
+    <div style="padding: 15px;" [ngClass]="{'highlight' : count == 5}">
+      Attempts: {{attempts}}
+      </div>
+      <div style="padding: 15px;" [ngClass]="{'highlight' : count == 6}">
+        In order: {{completed}} / {{timelineItems.length}}
+        </div>
+        <div style="padding: 15px; cursor: pointer;" [ngClass]="{'highlight' : count == 7}" (click)="showHint()">
+         Hint 
           </div>
-        </li>
-      </ul>
     </div>
-  </section>
-  <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble"></app-avatar>
+  <div class="container">
+   
+    <div class="items-list" cdkDropListGroup >
+      <div class="left-list " cdkDropList  [ngClass]="{'highlight': count == 1}">
+  <div class="item" *ngFor="let item of timelineItems; let i = index" cdkDrag  [ngClass]="{'item-drag' :  count == 3 && i == 0}" [ngStyle]="item?.isCompleted ? {'background': '#2196F3', 'color': '#fff'} : {}"
+  [ngClass]="{'hintOption' : item.hint}" >
+  {{item?.title}}
+  <ion-img src="../../assets/images/handPoint.png" *ngIf="count == 3 && i == 0"  style="rotate:-32deg; width: 70px;"/>
+  </div>
+</div>
+      <div class="right-list" [ngClass]="{'highlight': count == 2}">
+        <div class="drop-block" *ngFor="let item of timelineItems; let i = index" cdkDropList (cdkDropListDropped)="drop1($event, i)"  [ngClass]="{'hintOption' : result[i]?.hint}" [ngStyle]="droppedItems[i] ? {'background': '#2196F3', 'color': '#fff'} : {}" >
+          <div class="drop-placeholder" *ngIf="!droppedItems[i]" >Drop here</div>
+          <div class="dropped-item" *ngIf="droppedItems[i]" [@dropAnimation]="dropAnimationState" >{{droppedItems[i]?.title}} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble" (completed)="speechOver()"></app-avatar>
 </ion-content>

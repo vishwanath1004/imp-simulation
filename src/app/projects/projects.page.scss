@@ -210,9 +210,6 @@ body {
 }
 
 
-
-
-
   @keyframes slideIn {
     from {
       transform: translateX(-100%);
@@ -229,18 +226,134 @@ body {
   }
 
 
-  .highlight::before {
-    animation: highlight-animation 1s infinite;
+  .highlight{
+    animation: highlight-animation 2s infinite, zoom-in-zoom-out 1s ease infinite;
+}
+
+
+.topbar{
+  display: flex;
+  justify-content: space-around;
+  background: #2196f354;
+  height: 100px;
+  margin: 30px;
+  align-items: center;
+  font-size: 24px;
+  color: #795548;
+  font-weight: 900;
+}
+// drag and drop
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #2196f354;
+  margin: 30px 30px;
+}
+
+.items-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left-list {
+  width: 45%;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.right-list {
+  width: 45%;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.drop-block {
+  width: 100%;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #000;
+  margin: 5px;
+  min-height: 70px;
+}
+
+.item {
+  padding: 10px;
+  margin: 5px 0px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  width: 100%;
+  color: #000;
+  align-items: center;
+  min-height: 70px;
+  cursor: pointer;
+  align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+// animation 
+@keyframes guide {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(20%, 50px); }
+  35% { transform: translate(50%, 100px); }
+  50% { transform: translate(75%, 300px); }
+  75% { transform: translate(90%, 400px); }
+  90% { transform: translate(100%, 400px); }
+  100% { transform: translate(110%, 100px); }
+}
+
+.item-drag {
+  cursor: url('../../assets/images/handPoint.png'), auto;
+  animation: guide 2s ease-in-out infinite,highlight-animation 2s infinite;
+}
+
+.highlight-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+  animation: highlight-animation 2s infinite, zoom-in-zoom-out 1s ease infinite;
 }
 
 @keyframes highlight-animation {
   0% {
-    box-shadow: 0 0 10px 0 yellow;
+    box-shadow: 0 0 10px 10px yellow;
   }
   50% {
-    box-shadow: 0 0 20px 5px orange;
+    box-shadow: 0 0 20px 20px orange;
   }
   100% {
-    box-shadow: 0 0 10px 0 rgba(100, 248, 2, 0.5);
+    box-shadow: 0 0 10px 10px rgba(100, 248, 2, 0.5);
+  }
+}
+
+.hintOption{
+  box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+  animation: highlight-animation 2s infinite, zoom-in-zoom-out 1s ease infinite;
+}
+
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
   }
 }

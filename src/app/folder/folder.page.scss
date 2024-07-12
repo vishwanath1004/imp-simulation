@@ -1,7 +1,15 @@
 ion-menu-button {
   color: var(--ion-color-primary);
 }
-
+.cat-card{
+  height: 100px; 
+  cursor: pointer;
+}
+.cat-card:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+  background-color: #2979FF;
+}
 #container {
   text-align: center;
   position: absolute;

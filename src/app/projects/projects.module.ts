@@ -8,6 +8,7 @@ import { ProjectsPageRoutingModule } from './projects-routing.module';
 
 import { ProjectsPage } from './projects.page';
 import { SharedModule } from '../shared/shared.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     IonicModule,
     ProjectsPageRoutingModule,
     SharedModule,
+    DragDropModule
   ],
   declarations: [ProjectsPage]
 })

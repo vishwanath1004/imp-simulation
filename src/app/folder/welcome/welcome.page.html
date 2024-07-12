@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="bg">
-  <ion-card *ngIf="askName" style="margin: 35% 15px; padding: 15px; background-color: #fff;">
+  <ion-card *ngIf="askName" style="margin: 10% 15%;
+  padding: 15px;
+  background-color: #fff;
+  top: 30%;">
     <ion-label>Please enter your name.</ion-label>
     <ion-input
       style="border-bottom: 1px solid #eee; margin: 10px 0px;"
@@ -27,14 +30,16 @@
     </div>
   </ion-card>
     <div *ngIf="!askName  && !selected">
-      <ion-card style="margin: 35% 15px;
-      padding: 15px; background-color: #fff;">
+      <ion-card style="margin: 10% 15%;
+      padding: 15px;
+      background-color: #fff;
+      top: 30%;">
         <h1 style="text-align: center;"> Do you want to know about micro-improvement approach?
         </h1>
-        <ion-button (click)="onSelect('yes')" style="margin-top: 100px;" size="block">
+        <ion-button (click)="onSelect('yes')" style="margin-top: 100px;" size="block" color="primary">
           yes, I am intrested
         </ion-button>
-        <ion-button (click)="onSelect('no')" size="block">
+        <ion-button (click)="onSelect('no')" size="block" color="medium">
           No, Continue
         </ion-button>
         </ion-card>
@@ -44,6 +49,9 @@
         <h1 style="text-align: center;">micro-improvement approach
         </h1>
         </ion-card>
+
+        <div>
+          </div>
 <div  *ngIf="showSpeechBubble" >
   <app-avatar [speechText]="speechText" (completed)="talkOver()"></app-avatar>
   </div>

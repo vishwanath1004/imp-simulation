@@ -1,8 +1,9 @@
 .celebration{
     width: 100%;
-    height: 100%;
     position: absolute;
+    height: auto;
     top: 0;
+    bottom:0;
     background: #bbe1dc5c;
 }
 .title{
@@ -34,8 +35,6 @@
       opacity: 1;
     }
   }
-
-
   .celebration-text{
     animation: fadeIn 2s ease-in forwards;
     position: absolute;
@@ -45,4 +44,5 @@
     padding: 15px;
     color: #fff !important;
     border-radius: 10px;
+    margin-left: 25%;
   }

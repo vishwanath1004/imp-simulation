@@ -39,7 +39,7 @@
 
 .bg {
     background-image: url('./assets/images/bg1.png') !important;
-    background-size: cover;
+    background-size: contain;
     animation: moveBackground 10s linear infinite;
   }
 
@@ -53,6 +53,7 @@ ion-card {
     border: 1px solid #2979FF;
     margin-top: 0px;
     margin-bottom: 5px;
+    cursor: url('/assets/images/handPoint.png'), auto;
 }
 ion-card-title{
     color:#fff;
