@@ -11,3 +11,72 @@
   .animate-arrow {
     animation: bounce 0.8s infinite;
   }
+
+
+
+
+  .center-card {
+    margin: auto;
+    padding: 15px;
+    background-color: var(--color-card-background);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 80%;
+    border-radius: 24px;
+  }
+  
+  .input-field {
+    border-bottom: 1px solid #eee;
+    margin: 10px 0px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card-title {
+    margin-bottom: 20px;
+    font-size: 40px;
+    text-align: center;
+  }
+  
+  .input-field {
+    margin: 20px 0px;
+    font-size: 26px;
+    height: 45px;
+}
+
+
+
+
+ion-img.styled-image {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* If necessary, use ::ng-deep to penetrate shadow DOM */
+::ng-deep ion-img.styled-image img {
+  border-radius: 24px;
+}
+
+.styled-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 60%;
+  margin-top: -100px;
+}
+
+
+.bg1{
+  background-image: url(../../../assets/images/school/1.png) !important;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  object-fit: contain;
+}

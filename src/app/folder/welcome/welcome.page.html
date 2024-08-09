@@ -1,59 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title></ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button color="danger"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="bg">
-  <ion-card *ngIf="askName" style="margin: 10% 15%;
-  padding: 15px;
-  background-color: #fff;
-  top: 30%;">
-    <ion-label>Please enter your name.</ion-label>
-    <ion-input
-      style="border-bottom: 1px solid #eee; margin: 10px 0px;"
-      type="text"
-      placeholder="Enter your name here."
-      [(ngModel)]="profileName"
-      (ionInput)="onNameInput($event)"
-    ></ion-input>
-    <div style="display: flex; justify-content: right;">
-      <ion-button (click)="updateName()" [disabled]="!isNameValid">
-        <ion-icon
-          name="arrow-forward-outline"
-          [class.animate-arrow]="isNameValid"
-        ></ion-icon>
-      </ion-button>
-    </div>
-  </ion-card>
-    <div *ngIf="!askName  && !selected">
-      <ion-card style="margin: 10% 15%;
-      padding: 15px;
-      background-color: #fff;
-      top: 30%;">
-        <h1 style="text-align: center;"> Do you want to know about micro-improvement approach?
-        </h1>
-        <ion-button (click)="onSelect('yes')" style="margin-top: 100px;" size="block" color="primary">
-          yes, I am intrested
+<ion-content [fullscreen]="true" class="bg1" style="background-image: url('../../../assets/images/school/1.png') !important; background-repeat: no-repeat;">
+<div style="display: flex; justify-content: end;">
+  <div style=" height: 80px; padding: 10px;" (click)="next()">
+    <ion-icon name="arrow-forward" class="backIcon"></ion-icon>
+    <h1 class="text-deco custom"></h1>
+  </div>
+  </div>
+   <div>
+    <ion-card *ngIf="askName" class="center-card styled-card">
+      <h1 class="text-deco custom" style="justify-content: left; margin: 40px 0px;">Please enter your name.</h1>
+      <ion-input
+        class="input-field"
+        type="text"
+        placeholder="Enter your name here."
+        [(ngModel)]="profileName"
+        (ionInput)="onNameInput($event)"
+      ></ion-input>
+      <div class="button-container">
+        <ion-button (click)="updateName()" [disabled]="!isNameValid"  style="min-width: 200px;">
+          Next <ion-icon
+            name="arrow-forward-outline"
+            [class.animate-arrow]="isNameValid"
+          ></ion-icon>
         </ion-button>
-        <ion-button (click)="onSelect('no')" size="block" color="medium">
-          No, Continue
-        </ion-button>
-        </ion-card>
       </div>
-      <ion-card  *ngIf="selected" style="margin: 35% 15px;
-      padding: 15px; background-color: #fff;">
-        <h1 style="text-align: center;">micro-improvement approach
-        </h1>
-        </ion-card>
+    </ion-card>
+    <ion-card *ngIf="!askName && !selected" class="center-card styled-card">
+      <h1 class="card-title text-deco custom" style="margin-bottom: 50px;"> Do you want to know about the micro-improvement approach?</h1>
+      <div style="display: flex; justify-content: space-between;">
+        <div (click)="onSelect('yes')" class="cursor-pointer text-deco purples">Yes, I am interested</div>
+        <div (click)="onSelect('no')" class="cursor-pointer text-deco custom">No, Continue</div>
+      </div>
+    </ion-card>
 
-        <div>
-          </div>
-<div  *ngIf="showSpeechBubble" >
-  <app-avatar [speechText]="speechText" (completed)="talkOver()"></app-avatar>
+    <ion-card *ngIf="selected" class="center-card styled-card">
+      <h1 class="card-title text-deco custom">Micro-improvement approach</h1>
+    </ion-card>
+    </div>
+  <div *ngIf="showSpeechBubble">
+    <app-avatar [speechText]="speechText" (completed)="talkOver()" (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
+  </div>
+  <div *ngIf="!showSpeechBubble">
+    <app-avatar [speechText]="" (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
   </div>
 
 </ion-content>

@@ -1,0 +1,19 @@
+<div style="background-image: url(../../assets/images/bg31.png); background-size: cover;     height: 100%;">
+  <div style="    display: flex;
+  justify-content: end;
+  margin: 15px;">
+    <ion-icon name="close"  class="backIcon" style="background-color:#d3cdbb;" (click)="dismiss()"/>
+    </div>
+    <ion-card class="card-css" style="height: auto;">
+      <ion-card-header>
+        <ion-card-title>
+          {{data?.title}}
+          </ion-card-title>
+          <ion-card-content>
+            <div *ngFor="let activity of data?.activites; let i = index"> 
+              {{i+1}} : {{activity?.title}} 
+              </div>
+            </ion-card-content>
+      </ion-card-header>
+      </ion-card>
+  </div>

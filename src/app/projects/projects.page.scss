@@ -277,8 +277,19 @@ body {
   justify-content: center;
   background: #fff;
   color: #000;
-  margin: 5px;
+  margin: 3px;
   min-height: 70px;
+  animation: moveBackground 3s infinite linear;
+  background-size: 200% 100%;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .item {
@@ -357,3 +368,139 @@ body {
     transform: scale(1, 1);
   }
 }
+
+
+
+
+// type 2
+
+.container1 {
+  position: relative;
+  width: 30%;
+}
+
+.triangle {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: fit-content;
+  width: 100%;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+ion-card {
+  padding: 15px;
+  margin: 10px 15px;
+  color: #fff;
+  cursor: grab;
+}
+
+ion-card:active {
+  cursor: grabbing;
+}
+
+.drop-target-item {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #000;
+  color: red;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+}
+
+.correct {
+  background: green;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+}
+
+.progress-container {
+  width: 15px;
+  border-radius: 12px;
+  height: 100%;
+  border: 1px solid #000;
+  rotate: 180deg;
+}
+
+ion-progress-bar {
+  width: 100%;
+  background: linear-gradient(to bottom, red 30%, yellow 70%,  green);
+  transition: height 0.9s ease-in-out;
+  border-radius: 12px;
+}
+
+.dropped-overlay{
+  background-color: #ccc;
+  opacity: 0.5;
+}
+
+
+// fish
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+
+.crown {
+  position: relative;
+  transform: translate(-50%, -50%) scale(0); /* Center and scale to 0 */
+  animation: zoom-out 0.7s forwards, crown-animation 0.3s infinite alternate 0.5s; /* Add delay for crown-animation */
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: translate(-50%, -50%) scale(80);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes crown-animation {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.dropped-item{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.move-righttoleft {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Center the element and start with scale 0 */
+  animation: moveRL 3s forwards; /* Slow zoom-in animation */
+}
+
+@keyframes moveRL {
+  0% {
+    transform: translate(-50%, -50%) scale(0); /* Start at the center with scale 0 */
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1); /* End at the center with scale 1 (normal size) */
+  }
+}
+

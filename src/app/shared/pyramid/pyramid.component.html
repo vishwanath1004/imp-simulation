@@ -1,0 +1,9 @@
+<div class="pyramid">
+  <div *ngFor="let row of pyramid; let rowIndex = index" class="pyramid-row">
+    <div class="pyramid-layer">
+      <!-- Replace this with your actual object content -->
+      <div class="object">{{ rowIndex + 1 }}</div>
+    </div>
+  </div>
+</div>
+<button (click)="addObject()">Add Object</button>

@@ -36,35 +36,271 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+@font-face {
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+
+:root {
+  --color-background: #4F6F52;
+  --color-card-background: #cde8e5;
+  --color-card-border: #7ab2b2;
+  --color-text: #40534C;
+  --color-button-background: #D6BD98;
+  --color-button-text: #40534C;
+  --color-shadow: rgba(0, 0, 0, 0.2);
+  --color-left-background:#677D6A
+}
+
+// :root {
+//   --color-background: #01204E;
+//   --color-card-background: #028391;
+//   --color-card-border: #028391;
+//   --color-text: #F6DCAC;
+//   --color-button-background: #F6DCAC;
+//   --color-button-text: #01204E;
+//   --color-shadow: #01204E;
+// --color-left-background:#8CA1A5
+// }
+
+// :root {
+//   --color-background: #EBC7E8;
+//   --color-card-background: #645CAA;
+//   --color-card-border: #645CAA;
+//   --color-text: #EBC7E8;
+//   --color-button-background: #A084CA;
+//   --color-button-text: #EBC7E8;
+//   --color-shadow: #645CAA;
+ // --color-left-background:#8CA1A5
+// }
+
+
+
+// :root {
+//   --color-background: #D5BFBF;
+//   --color-card-background: #316B83;
+//   --color-card-border: #316B83;
+//   --color-text: #D5BFBF;
+//   --color-button-background: #8CA1A5;
+//   --color-button-text: #6D8299;
+//   --color-shadow: #645CAA;
+//   --color-left-background:#6D8299
+// }
+
+// :root {
+//   --color-background: #293462;
+//   --color-card-background: #216583;
+//   --color-card-border: #00818A;
+//   --color-text: #F7BE16;
+//   --color-button-background: #F7BE16;
+//   --color-button-text: #6D8299;
+//   --color-shadow: #F7BE16;
+//   --color-left-background:#00818A
+// }
+
+// :root {
+//   --color-background: #E88D67;
+//   --color-card-background: #006989;
+//   --color-card-border: #006989;
+//   --color-text: #F3F7EC;
+//   --color-button-background: #F3F7EC;
+//   --color-button-text: #6D8299;
+//   --color-shadow: #005C78;
+//   --color-left-background:#005C78
+// }
+
+.drop-area{
+  background-color: var(--color-button-background);
+   height: 90vh;
+   border-radius: 24px;
+}
 
 .bg {
-    background-image: url('./assets/images/bg1.png') !important;
-    background-size: contain;
-    animation: moveBackground 10s linear infinite;
-  }
-
-ion-content{
-    --ion-background-color:transperant; // Or whatever color you want
+  background-image: url('./assets/images/bg_12.png') !important;
+  background-size: contain;
+  animation: moveBackground 10s linear infinite;
 }
 
+ion-content {
+  --ion-background-color: transperant; 
+}
 
 ion-card {
-    background-color: #2979ff99;
-    border: 1px solid #2979FF;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    cursor: url('/assets/images/handPoint.png'), auto;
-}
-ion-card-title{
-    color:#fff;
+  background-color: var(--color-card-background) !important;
+  border: 1px solid var(--color-card-border) !important;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  color: var(--color-text);
+  cursor: url('/assets/images/handPoint.png'), auto;
 }
 
+ion-card-title {
+  color: var(--color-text);
+}
 
 @keyframes moveBackground {
-    0% {
-      background-position: 0% 100%;
-    }
-    100% {
-      background-position: 0% 0%;
-    }
+  0% {
+    background-position: 0% 100%;
   }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+ion-button {
+  --background: var(--color-button-background);
+  color: var(--color-button-text);
+}
+
+.card-css {
+  background-color: var(--color-card-background) !important;
+  border: 1px solid var(--color-card-border) !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  height: auto;
+  color: var(--color-text) !important;
+  font-weight: 800;
+  font-size: 24px;
+  cursor: url(/assets/images/handPoint.png), auto;
+  border-radius: 24px;
+  box-shadow: 0px 1px 5px 1px var(--color-text);
+  padding: 15px 15px;
+ 
+}
+
+.flex-space-center{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.card-css:hover {
+  box-shadow: 0px 1px 14px 1px var(--color-text);
+}
+
+.shine {
+  width: 1000px;
+  height: 100px;
+  margin-left: -100px;
+  transform: rotate(30deg);
+  background: -webkit-linear-gradient(top, transparent, rgba(200,200,200,0.1), transparent);
+  position: absolute;
+  animation: shine 6s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    margin-top: -350px;
+  }
+  100% {
+    margin-top: 350px;
+  }
+}
+
+.left-class{
+  background-image: url(./assets/images/bg31.png); 
+  background-size: cover;
+  background-color: var(--color-left-background) !important;
+   border-radius: 24px; 
+   display: flex; 
+   justify-content: center; 
+   overflow: auto;
+   max-height: 90vh;
+}
+
+.container-card{
+  display: flex; justify-content: space-around;
+  height: 90vh; 
+  overflow: auto;
+  padding: 15px;
+}
+
+
+.highlight{
+  animation: highlight-animation 2s infinite;
+}
+@keyframes highlight-animation {
+  0% {
+    box-shadow: 0 0 5px 5px yellow;
+  }
+  25% {
+    box-shadow: 0 0 5px 5px rgb(231, 192, 16);
+  }
+  50% {
+    box-shadow: 0 0 5px 5px orange;
+  }
+  70% {
+    box-shadow: 0 0 10px 10px rgb(162, 225, 1);
+  }
+  100% {
+    box-shadow: 0 0 10px 10px rgba(100, 248, 2, 0.5);
+  }
+}
+
+
+
+@font-palette-values --Purples {
+  font-family: Rocher;
+  base-palette: 6;
+}
+
+@font-palette-values --custom {
+  font-family: Rocher;
+  base-palette: 11;
+}
+.custom {
+  font-palette: --custom;
+}
+
+.purples {
+  font-palette: --Purples;
+}
+
+.congrats-text{
+  display: flex; 
+      justify-content: center;
+      font-size: 3rem;
+      font-family: 'Rocher', sans-serif; 
+      position: absolute;
+      align-items: center;
+      z-index: 9;
+      font-weight: 700;
+      font-size: 4rem;
+      width: 100%;
+      text-shadow: 3px 2px 0px #FFB650, 3px 2px 0px #FFD662, 4px 4px 0px #FF80BF, 5px 6px 0px #EF5097, 8px 8px 0px #6868AC, 10px 6px 0px #90B1E0;
+}
+
+.text-deco{
+  display: flex; 
+      justify-content: center;
+      font-size: 3rem;
+      font-family: 'Rocher', sans-serif; 
+      align-items: center;
+      z-index: 9;
+      font-weight: 700;
+      font-size: 2rem;
+      width: 100%;
+      // text-shadow: 3px 2px 0px #FFB650, 3px 2px 0px #FFD662;
+}
+
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+
+
+@keyframes rotate {
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+.backIcon{
+  cursor: pointer; 
+  font-size: 54px; 
+  border: 1px solid var(--color-background); 
+  border-radius: 50%; 
+  padding: 4px; 
+  color: var(--color-background);
+}

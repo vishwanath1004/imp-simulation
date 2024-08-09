@@ -4,12 +4,13 @@ import { CelebrationComponent } from './celebration/celebration.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AvatarComponent } from './avatar/avatar.component';
 import { TypingAnimationDirective } from './typing-animation.directive';
+import { PyramidComponent } from './pyramid/pyramid.component';
 
 AvatarComponent
 
 @NgModule({
-  declarations: [CelebrationComponent,AvatarComponent,TypingAnimationDirective],
-  exports:[CelebrationComponent,AvatarComponent],
+  declarations: [CelebrationComponent,AvatarComponent,TypingAnimationDirective,PyramidComponent],
+  exports:[CelebrationComponent,AvatarComponent,PyramidComponent],
   imports: [
     CommonModule,
     IonicModule

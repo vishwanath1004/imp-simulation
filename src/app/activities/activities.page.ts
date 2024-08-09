@@ -28,9 +28,7 @@ export class ActivitiesPage implements OnInit {
         })
           this.categories.forEach((projects :any) =>{
             if(this.subCategoryIndex && projects.subDomain?.length){
-              console.log(projects?.subDomain,"projects?.subDomain");
             let subDomain =  projects?.subDomain.find((subDomain:any) => subDomain.id == this.subCategoryIndex)
-              console.log(subDomain,"subDomain")
               let activity : any =  subDomain?.improvements?.projects.find((project:any) =>project.id == param.id);
               if(activity){
                this.selectedImp = activity;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UtilsService } from 'src/app/utils.service';
 
 @Component({
   selector: 'app-welcome',
@@ -8,7 +7,7 @@ import { UtilsService } from 'src/app/utils.service';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-  profileName ='';
+  profileName :any ='';
   askName : boolean = false;
   showSpeechBubble: boolean = false;
   speechText: string = "";
@@ -17,7 +16,6 @@ export class WelcomePage implements OnInit {
   selected :boolean = false;
   isNameValid = false;
   constructor(
-    private utils : UtilsService,
     private router : Router
   ) { }
 
@@ -25,47 +23,64 @@ export class WelcomePage implements OnInit {
   }
 
   ionViewWillEnter(){
-    if(this.utils.profileName){
-      this.profileName = this.utils.profileName;
+  this.profileName = localStorage.getItem('name');
+    if(this.profileName){ 
       this.askName = false;
       this.showSpeechBubble = false;
       this.count =1;
       this.speechText =  this.text[this.count];
     }else {
   this.text =["Hi, Please enter your good name."];
-      this.showSpeechBubble = true;
+     
       this.askName = true;
       this.speechText =  this.text[this.count];
+      this.showSpeechBubble = true;
     }
   }
 
   updateName(){
     this.showSpeechBubble = false;
-    this.utils.setName(this.profileName);
-    this.text.push(`Thank you, Hello ${this.profileName}! Welcome to micro-improvement simulation.`,
-    "Do you want to know  about micro-improvement approach? please click on Yes, or else click on No to continue to the project simulation",)
+    localStorage.setItem('name',this.profileName);
+    this.text=["Hi, Please enter your good name.",`Thank you, Hello ${this.profileName}! Welcome to micro-improvement simulation.`,
+    "I am here to help you"
+  ];
+  this.speechText = "";
     setTimeout(() =>{
-    this.askName  = false;
       this.count ++;
-      console.log( this.count,"this.count");
-      this.speechText =  this.text[this.count]
+      this.speechText =  this.text[this.count];
       this.showSpeechBubble = true;
     },100)
+    // setTimeout(() =>{
+    //   this.router.navigate(['/folder']);
+    // },1000)
+  }
+  stopSpeech(){
+    this.showSpeechBubble = false;
   }
 
-
+  resumeSpeech(){
+    setTimeout(() =>{
+      this.showSpeechBubble = true;
+      if(!this.speechText){
+        this.speechText = this.text[this.count];
+      }
+    },100)
+  }
   talkOver(){
     this.showSpeechBubble = false;
-    if( this.count +1 < this.text?.length && !this.askName ){
+    console.log(this.count,"this.count",this.text?.length, this.selected, this.askName)
+    if( this.count +1 < this.text?.length){
     this.count++;
       this.speechText  = this.text[this.count];
       setTimeout(() =>{
         this.showSpeechBubble = true;
       },100)
     }else{
-      if(this. selected){
+      if(this.selected && this.askName  || !this.selected && this.askName){
         setTimeout(() =>{
           this.router.navigate(['/folder']);
+          this.askName  = false;
+
         },100)
         return
       }
@@ -76,6 +91,8 @@ export class WelcomePage implements OnInit {
         },100)
         setTimeout(() =>{
           this.router.navigate(['/folder']);
+    this.askName  = false;
+
         },200)
       }
     }
@@ -91,8 +108,8 @@ export class WelcomePage implements OnInit {
       this.selected = true;
       this.count++;
       this.text.push(`The objective of micro-improvement approach is to make systemic change in the education system through a series of easy, 
-      simple, +1 and doable initiatives.
-       It empowers stakeholders to undertake incremental micro-steps within their daily operational contexts, where they learn by doing.`,
+      simple, +1 and doable initiatives.`,
+       `It empowers stakeholders to undertake incremental micro-steps within their daily operational contexts, where they learn by doing.`,
        `It helps them in streamlining the activities leading to positive change in the school education system.`, 
        `The micro-improvement approach is implemented through the project capability. 
        It includes smaller action steps towards a larger goal. It is short term in nature.`,
@@ -106,6 +123,13 @@ export class WelcomePage implements OnInit {
       },100)
     }else{
       this.router.navigate(['/folder']);
+    this.askName  = false;
+
     }
+  }
+  next(){
+      this.router.navigate(['/folder']);
+    this.askName  = false;
+
   }
 }

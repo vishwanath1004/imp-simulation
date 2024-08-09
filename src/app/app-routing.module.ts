@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NewComponent } from './new/new.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('../app/folder/welcome/welcome.module').then( m => m.WelcomePageModule)
+  },
+  {
+    path: 'new/:id',
+    component:NewComponent
   }
 ];
 

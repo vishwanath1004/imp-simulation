@@ -11,14 +11,14 @@ export class TypingAnimationDirective implements OnChanges {
 
   ngOnChanges(changes: any) {
     console.log(changes,"changes")
-    if (changes.text || changes.duration) {
+    if (changes.text && changes.text.length || changes.duration) {
       this.typeText(this.text, this.duration);
     }
   }
 
   private typeText(text: string, duration: number) {
-    this.el.nativeElement.innerHTML = ''; // Clear the element
-    const totalLength = text.length;
+    this.el.nativeElement.innerHTML = '';
+    const totalLength =text.length;
     const interval = duration / totalLength;
     let index = 0;
 

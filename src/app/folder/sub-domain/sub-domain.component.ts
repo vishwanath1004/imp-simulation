@@ -23,7 +23,6 @@ export class SubDomainComponent  {
   }
 
   onSelect(id:any){
-    console.log(id,"id");
     this.modal.dismiss(id);
   }
  
