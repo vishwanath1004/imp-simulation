@@ -22,11 +22,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class FolderPage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
-  images = Array(5).fill({ src: '../../assets/images/progress.gif' });
+  images = Array(5).fill({ src: './assets/images/progress.gif' });
   showSpeechBubble: boolean = false;
   showProgress: boolean = false;
   totalSteps =1;
-  schoolImage ="";
+  schoolImage ="./assets/images/school/1.png";
   text = [
     "On the left side of the screen, you can see the list of improvement project domains.",
     "And on the right side, we have a school with poor infrastructure.",
@@ -84,7 +84,6 @@ export class FolderPage implements OnInit {
 
   ionViewWillEnter(){
     this.visited = localStorage.getItem('page2') ?  true : false;
-    console.log(this.visited,"this.visited");
     this.imagesPerCategory = Math.ceil(8 / this.categories.length);
     const completed = this.categories.filter(category => category.isCompleted);
       if(completed?.length){
@@ -97,7 +96,7 @@ export class FolderPage implements OnInit {
           this.changeSchool(completed);
         },2000)
       }else{
-        this.schoolImage ="../../assets/images/school/1.png"
+        this.schoolImage ="./assets/images/school/1.png"
       }
   }
 
@@ -134,8 +133,8 @@ export class FolderPage implements OnInit {
     for (let i = this.totalSteps; i <= this.imagesPerCategory * this.categoriesCompleted; i++) {
       this.totalSteps++;
       setTimeout(() => {
-        const currentImage = `../../assets/images/school/${i}.png`;
-        const nextImage = `../../assets/images/school/${i + 1}.png`;
+        const currentImage = `./assets/images/school/${i}.png`;
+        const nextImage = `./assets/images/school/${i + 1}.png`;
 
         this.applyKeyframeAnimation(currentImage, nextImage, i);
         this.schoolImage = currentImage;

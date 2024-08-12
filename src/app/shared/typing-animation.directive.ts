@@ -10,7 +10,6 @@ export class TypingAnimationDirective implements OnChanges {
   constructor(private el: ElementRef) { }
 
   ngOnChanges(changes: any) {
-    console.log(changes,"changes")
     if (changes.text && changes.text.length || changes.duration) {
       this.typeText(this.text, this.duration);
     }

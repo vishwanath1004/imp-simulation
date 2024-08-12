@@ -1,30 +1,19 @@
-<div class="avatar-container" [class.hidden]="!isAvatarVisible" [class.visible]="isAvatarVisible" ><img  src="../../assets/images/charcter_2.png" class="avatar-img_1">
-  <div style="display: flex;
-  justify-content: space-around;
-  position: absolute;
-  font-size: 14px;
-  width: 90%;">
-          <div >
-                <p style="
-                  width: 330px;
-              min-width: 330px;
-              height: 60px;
-              margin-top: 20px;
-              color: #677d6a; text-wrap: pretty;
-              display: flex;
-              align-items: center;
-              margin-left: 100px;
-          " >{{ speechText }}</p>
+<div class="avatar-container" [ngClass]="{ 'hidden': !isAvatarVisible, 'visible': isAvatarVisible }">
+  <img src="./assets/images/charcter_2.png" class="avatar-img_1" />
 
-          </div>
-      <div style="
-        width: 10%; display: flex; justify-content: end; align-items: center;
-      "><ion-label  class="next-button sc-ion-label-md-h sc-ion-label-md-s md hydrated" (click)="stop()" *ngIf="!resumed && speechText ">Skip</ion-label>
-      <ion-label class="replay-button sc-ion-label-md-h sc-ion-label-md-s md hydrated" (click)="resume()" *ngIf="!speechText || resumed">Replay</ion-label>
-      </div>
-</div>
+  <div style="display: flex; justify-content: space-around; position: absolute; font-size: 14px; width: 90%;">
+    <div>
+      <p style="width: 330px; min-width: 330px; height: 60px; margin-top: 20px; color: #677d6a; word-wrap: break-word; display: flex; align-items: center; margin-left: 100px;">
+        {{ speechText }}
+      </p>
+    </div>
+    <div style="width: 10%; display: flex; justify-content: end; align-items: center;">
+      <ion-label class="next-button" (click)="stop()" *ngIf="!resumed && speechText">Skip</ion-label>
+      <ion-label class="replay-button" (click)="resume()" *ngIf="!speechText || resumed">Replay</ion-label>
+    </div>
+  </div>
 </div>
 
 <div class="ask-help" (click)="onAction()">
- {{action}}
-  </div>
+  {{ action }}
+</div>

@@ -9,14 +9,13 @@ import { ModalController } from '@ionic/angular';
 export class DetailsComponent  implements OnInit {
 @Input() data : any;
   constructor(
-    private modal : ModalController
+    private modalControllers : ModalController
   ) { }
 
   ngOnInit() {
-    console.log(this.data,"data");
   }
 
   dismiss(){
-    this.modal.dismiss();
+    this.modalControllers.dismiss();
   }
 }

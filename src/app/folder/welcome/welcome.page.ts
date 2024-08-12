@@ -68,7 +68,6 @@ export class WelcomePage implements OnInit {
   }
   talkOver(){
     this.showSpeechBubble = false;
-    console.log(this.count,"this.count",this.text?.length, this.selected, this.askName)
     if( this.count +1 < this.text?.length){
     this.count++;
       this.speechText  = this.text[this.count];

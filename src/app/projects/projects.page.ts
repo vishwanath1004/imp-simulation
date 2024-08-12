@@ -386,6 +386,5 @@ increaseFishSize() {
         let margin = "0 " + (i * (50 / this.timelineItems.length)) + "%";
         this.widthList.push({ width: width, margin: margin });
     }
-    console.log(this.widthList,"widthlist");
 }
 }

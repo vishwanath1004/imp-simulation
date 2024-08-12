@@ -45,7 +45,7 @@ export class NewComponent  implements OnInit {
     private utils: UtilsService,
     private routerParam: ActivatedRoute,
     private location : Location,
-    private modal : ModalController
+    private modalController : ModalController
   ) {
     let category : any =[];
     this.routerParam.params.subscribe((param: any) => {
@@ -73,12 +73,10 @@ export class NewComponent  implements OnInit {
   initializeCategory() {
   this.visited = localStorage.getItem('page3') ?  true : false;
     const category = this.categories[this.categoryId];
-    console.log("initializeCategory")
     if (category?.subDomain?.length) {
       // this.timelineItems = category.subDomain[this.subCategoryIndex]?.improvements?.projects ?? [];
     } else {
       this.timelineItems = [...category?.improvements?.projects] ?? [];
-      console.log(this.timelineItems,"this.timelineItems ");
       this.result = category?.improvements?.result?.slice().reverse() ?? [];
       if(!this.visited){
         this.completed =0;
@@ -106,7 +104,6 @@ export class NewComponent  implements OnInit {
 
   onDragOver(event: any, item: any) {
     // event.preventDefault();
-    console.log("event",item);
     item.isDragging =  false;
     this.draggingItem = item;
   }
@@ -116,7 +113,6 @@ export class NewComponent  implements OnInit {
     this.showSpeechBubble = false;
     this.count++;
     this.speechText = this.texts[this.count];
-    console.log( this.speechText," this.speechText");
     setTimeout(() =>{
     this.showSpeechBubble = true;
     },0)
@@ -148,7 +144,6 @@ ionViewWillEnter() {
       this.showSpeechBubble = false;
     },0)
     if(!this.timelineItems?.[event.previousIndex].isCompleted && index == this.completed){
-      console.log(this.result?.[(this.result?.length -1) - this.completed]?.id,"this.result?.[(this.result?.length -1) - this.completed]?.id",this.draggingItem.id);
         if(this.result?.[(this.result?.length -1) - this.completed]?.id === this.draggingItem.id){
       if(this.droppedItems?.length){
         const newIndex = this.droppedItems.length;
@@ -181,16 +176,19 @@ ionViewWillEnter() {
         this.speechText = "Congratulation! you sorted the given improvement projects in correct order.";
         setTimeout(() =>{
           this.showSpeechBubble = true
-        },0)
+        },100)
         this.categories[this.categoryId].isCompleted = true;
         return;
       }
+      let audio = new Audio('./assets/onSuccess.mp3')
+      audio.load();
+     await audio.play();
       this.speechText = "Great! you placed in correct order. Keep moving on";
       setTimeout(() =>{
         this.showSpeechBubble = true
-      },0)
+      },300)
       }else{
-        let audio = new Audio('../../assets/wrong.mp3')
+        let audio = new Audio('./assets/wrong.mp3')
         audio.load();
        await audio.play();
         this.speechText = "Ohhh! this is the not correct position for this improvement project";
@@ -256,12 +254,12 @@ resumeSpeech(){
 }
 
 async openDetail(data: any){
-  const modal = this.modal.create({
+  const modalctrl = this.modalController.create({
     component: DetailsComponent,
       componentProps:{
         data:data
       }
   });
-  (await modal).present();
+  (await modalctrl).present();
 }
 }

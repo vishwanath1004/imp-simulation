@@ -120,6 +120,12 @@
   background-size: contain;
   animation: moveBackground 10s linear infinite;
 }
+.bg1{
+  background-image: url('./assets/images/school/1.png') !important;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  object-fit: contain;
+}
 
 ion-content {
   --ion-background-color: transperant; 
@@ -202,8 +208,6 @@ ion-button {
   background-size: cover;
   background-color: var(--color-left-background) !important;
    border-radius: 24px; 
-   display: flex; 
-   justify-content: center; 
    overflow: auto;
    max-height: 90vh;
 }
