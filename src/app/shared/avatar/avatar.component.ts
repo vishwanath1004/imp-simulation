@@ -84,9 +84,11 @@ export class AvatarComponent implements OnInit {
     this.isAvatarVisible = !this.isAvatarVisible;
     this.action = this.isAvatarVisible ? 'Hide' : 'Help';
     localStorage.setItem('isAvatarVisible', this.action);
-
     if (!this.isAvatarVisible) {
       this.stop();
+      this.stopSpeech.emit();
+    }else{
+        this.resume();
     }
   }
 }

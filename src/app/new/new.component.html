@@ -58,7 +58,15 @@
         <ion-img src="./assets/images/childrenCelebration.gif" style=" transform: rotateY(180deg);" />
         <ion-img src="./assets/images/childrenCelebration.gif"/>
         </div>
+
+        <div style="display: flex;
+        justify-content: center;">
+          <ion-button  (click)="goBack()" > <ion-icon  name="arrow-back"> </ion-icon>  Domains  page
+            </ion-button>
         </div>
+        </div>
+
+
     </ion-col>
 
     <ion-col size="5.5" class="sm-12 drop-area right-list" style="background-image: url(./assets/images/bg31.png);background-size: cover; display: flex; flex-direction: column-reverse;" [ngClass]="{'highlight':!speechStop &&  count ==2 }">

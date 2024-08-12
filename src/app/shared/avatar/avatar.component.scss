@@ -50,17 +50,18 @@
 }
 
 .ask-help{
-  width: 66px;
+  width: 75px;
   position: fixed;
   bottom: 10px;
   right: 10px;
   background: #ccc;
-  height: 66px;
+  height: 75px;
   border-radius: 50%;
   cursor: pointer;
-  padding: 24px 15px;
+  padding: 27px 15px;
   color: #9d3d28;
   font-weight: 900;
+  text-align: center;
 }
 
 .avatar-container {

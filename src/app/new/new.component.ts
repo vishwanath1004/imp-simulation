@@ -40,6 +40,7 @@ export class NewComponent  implements OnInit {
   showDropAnimation : boolean = false;
   visited : boolean = false;
   draggingItem : any;
+  isAvatarHide : boolean = false;
   constructor(
     private router: Router,
     private utils: UtilsService,
@@ -122,6 +123,10 @@ export class NewComponent  implements OnInit {
         },0)
     }
 }
+let hide = localStorage.getItem('isAvatarVisible');
+if(this.completed ==  this.result?.length){
+  console.log("127");
+}
 if(this.completed ==  this.result?.length){
   this.speechText = "You are now being redirected to the improvement projects domain list.";
   setTimeout(() =>{
@@ -173,11 +178,17 @@ ionViewWillEnter() {
        
       this.completed++;
       if(this.completed ==  this.result?.length){
-        this.speechText = "Congratulation! you sorted the given improvement projects in correct order.";
-        setTimeout(() =>{
-          this.showSpeechBubble = true
-        },100)
+        if(!this.isAvatarHide){
         this.categories[this.categoryId].isCompleted = true;
+          this.speechText = "Congratulation! you sorted the given improvement projects in correct order.";
+          setTimeout(() =>{
+            this.showSpeechBubble = true
+          },100)
+        }else{
+          setTimeout(() =>{
+            this.location.back();
+          },100)
+        }
         return;
       }
       let audio = new Audio('./assets/onSuccess.mp3')
@@ -240,7 +251,12 @@ stopSpeech(){
   this.showSpeechBubble = false;
   this.count =  this.texts.length+1;
   localStorage.setItem('page3', "true");
-
+  this.isAvatarHide = true;
+  if(this.completed ==  this.result?.length){
+      setTimeout(() =>{
+        this.location.back();
+      },10);
+  }
 }
 
 resumeSpeech(){
@@ -248,6 +264,7 @@ resumeSpeech(){
     this.count = 0;
     this.speechText = this.texts[this.count];
   }
+  this.isAvatarHide = false;
   setTimeout(() =>{
     this.showSpeechBubble = true;
   },100)

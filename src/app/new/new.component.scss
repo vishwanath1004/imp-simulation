@@ -130,11 +130,12 @@
   }
 }
 .bottom-label{
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
   background: #e2c0a7;
-  margin: -18px -16px;
-  position: relative;
   width: 100px !important;
-  right: 0px;
   font-size: 14px;
   height: auto;
   display: flex;

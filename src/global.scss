@@ -210,6 +210,8 @@ ion-button {
    border-radius: 24px; 
    overflow: auto;
    max-height: 90vh;
+   display: flex;
+    align-items: center;
 }
 
 .container-card{
