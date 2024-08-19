@@ -51,7 +51,7 @@ export class WelcomePage implements OnInit {
       this.showSpeechBubble = true;
     },100)
     // setTimeout(() =>{
-    //   this.router.navigate(['/folder']);
+    //   this.router.navigate(['/domains']);
     // },1000)
   }
   stopSpeech(){
@@ -77,7 +77,7 @@ export class WelcomePage implements OnInit {
     }else{
       if(this.selected && this.askName  || !this.selected && this.askName){
         setTimeout(() =>{
-          this.router.navigate(['/folder']);
+          this.router.navigate(['/domains']);
           this.askName  = false;
 
         },100)
@@ -89,7 +89,7 @@ export class WelcomePage implements OnInit {
           this.showSpeechBubble = true;
         },100)
         setTimeout(() =>{
-          this.router.navigate(['/folder']);
+          this.router.navigate(['/domains']);
     this.askName  = false;
 
         },200)
@@ -121,13 +121,13 @@ export class WelcomePage implements OnInit {
         this.showSpeechBubble = true;
       },100)
     }else{
-      this.router.navigate(['/folder']);
+      this.router.navigate(['/domains']);
     this.askName  = false;
 
     }
   }
   next(){
-      this.router.navigate(['/folder']);
+      this.router.navigate(['/domains']);
     this.askName  = false;
 
   }

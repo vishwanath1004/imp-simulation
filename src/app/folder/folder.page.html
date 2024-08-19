@@ -10,10 +10,10 @@
     </ion-toolbar>
   </ion-header>
   <ion-row class="container-card">
-    <ion-col size="5.5" class="left-class">
+    <ion-col size="12" size-lg="5.5" class="left-class">
       <div style="margin-top: 15%;">
         <ion-row >
-        <ion-col size="12" *ngFor="let cat of categories; let i = index">
+        <ion-col size="12"  *ngFor="let cat of categories; let i = index">
           <ion-card class="card-css flex-space-center" (click)="navigateToProject(i)" style="margin-bottom: 15px; height: auto;"
             [ngClass]="{
               'highlight': count == 0 && !visited
@@ -28,7 +28,7 @@
         </ion-row>
       </div>
     </ion-col>
-    <ion-col size="5.5" style="background-image: url(../../assets/images/bg31.png);  background-size: cover; background-color:var(--color-button-background); justify-content: center; display: flex; border-radius: 24px; flex-direction: column; align-items: center;">
+    <ion-col size="12" size-lg="5.5" style="background-image: url(../../assets/images/bg31.png);  background-size: cover; background-color:var(--color-button-background); justify-content: center; display: flex; border-radius: 24px; flex-direction: column; align-items: center;">
       <ion-img  class="styled-image" [@fadeAnimation] [src]="schoolImage" style="width: 90%;"></ion-img>
       <div class="progress-container" *ngIf="showProgress">
         <ion-img *ngFor="let img of images" [src]="img?.src" class="progress-image" [ngClass]="{'zoomout' :zoomOut }"></ion-img>

@@ -5,10 +5,10 @@
   </div>
 
   <ion-row cdkDropListGroup class="container-card">
-    <ion-col size="5.5" class="left-class"
-    [ngClass]="{'collapse' : timelineItems?.length === 0}" >
+    <ion-col size="12" size-lg="5.5" class="left-class ion-padding-end" style="padding-right: 15px;"
+      [ngClass]="{'collapse' : timelineItems?.length === 0}">
       <ion-row cdkDropList *ngIf="timelineItems?.length" style="margin-right: 20px;">
-        <ion-col size="12" *ngFor="let item of timelineItems; let i = index" >
+        <ion-col size="12" *ngFor="let item of timelineItems; let i = index">
           <ion-card class="card-css" style="display: flex; height: auto; min-height: 100px;"
               cdkDrag 
               (cdkDragStarted)="onDragStart($event, item)" 
@@ -16,91 +16,78 @@
               [ngStyle]="item?.isCompleted ? {'background': '#2196F3', 'color': '#fff'} : {}"
               [ngClass]="{
                 'highlight': !speechStop && count == 1,
-                'flipped': !speechStop &&count == 1,
+                'flipped': !speechStop && count == 1,
                 'item-drag': !speechStop && count == 3 && i == 0,
-              }"
-              >
-     <div style="width: 90%;     display: flex;
-     align-items: center;">
-      <div class="shine"></div>
-      <div class="" style="    width: 93%;
-      text-align: center;     color: darkgoldenrod;
-    text-shadow: 1px 2px #000;">
-      {{item?.title}}
-      </div>
-     </div>
-      <div class="bottom-label" (click)="openDetail(item)" style="width: 10%;">
-        <ion-img src="./assets/images/more.png" style="width: 60px;" />
-        <div>View more
-          </div>
-        </div>
-    </ion-card>
+              }">
+            <div style="width: 90%; display: flex; align-items: center;">
+              <div class="shine"></div>
+              <div style="width: 93%; text-align: center; color: darkgoldenrod; text-shadow: 1px 2px #000;">
+                {{item?.title}}
+              </div>
+            </div>
+            <div class="bottom-label" (click)="openDetail(item)" style="width: 10%;">
+              <ion-img src="./assets/images/more.png" style="width: 60px;" />
+              <div>View more</div>
+            </div>
+          </ion-card>
         </ion-col>
       </ion-row>
+      
       <div *ngIf="!timelineItems?.length">
         <div class="congrats-text purples">
           Congratulations
-          </div>
-          <div class="congrats-text purples" style="    top: 12rem;
-          font-size: 36px;
-          text-align: center;">
-            You sorted all given Improvement projects
-            </div>
-         <div style="display: flex; justify-content: space-between;">
-          <ion-img src="./assets/images/firework.gif"  style="     width: 207px;
-          position: relative;
-          top: 39px;"/>
-            <ion-img src="./assets/images/firework.gif"  style="     width: 207px;
-            position: relative;
-            top: 39px;"/>
-          </div>
-        <div  style="display: flex; justify-content: space-between; margin-top:100px">
-        <ion-img src="./assets/images/childrenCelebration.gif" style=" transform: rotateY(180deg);" />
-        <ion-img src="./assets/images/childrenCelebration.gif"/>
         </div>
-
-        <div style="display: flex;
-        justify-content: center;">
-          <ion-button  (click)="goBack()" > <ion-icon  name="arrow-back"> </ion-icon>  Domains  page
-            </ion-button>
+        <div class="congrats-text purples" style="top: 12rem; font-size: 36px; text-align: center;">
+          You sorted all given Improvement projects
         </div>
+        <div style="display: flex; justify-content: space-between;">
+          <ion-img src="./assets/images/firework.gif" style="width: 207px; position: relative; top: 39px;"/>
+          <ion-img src="./assets/images/firework.gif" style="width: 207px; position: relative; top: 39px;"/>
         </div>
-
-
+        <div style="display: flex; justify-content: space-between; margin-top:100px">
+          <ion-img src="./assets/images/childrenCelebration.gif" style="transform: rotateY(180deg);" />
+          <ion-img src="./assets/images/childrenCelebration.gif"/>
+        </div>
+      </div>
     </ion-col>
-
-    <ion-col size="5.5" class="sm-12 drop-area right-list" style="background-image: url(./assets/images/bg31.png);background-size: cover; display: flex; flex-direction: column-reverse;" [ngClass]="{'highlight':!speechStop &&  count ==2 }">
+  
+    <ion-col size="12" size-lg="5.5"  class="drop-area right-list ion-padding-start" 
+      style="background-image: url(./assets/images/bg31.png); background-size: cover; display: flex; flex-direction: column-reverse;" 
+      [ngClass]="{'highlight':!speechStop && count == 2 }">
       <div style="margin: 20px;">
         <div *ngIf="completed == result?.length" style="display: flex; justify-content: center;">
           <ion-img src="./assets/images/source.gif" style="width: 100px;" class="crown"></ion-img>
         </div>
-      
-      
         <div *ngFor="let index of getReverseIndices(result.length)">
-          <div style="display: flex;"  [ngStyle]="{
+          <div style="display: flex;" [ngStyle]="{
             'width': index == 0 ? '100%' : widthList[index]?.width,
             'margin': index == 0 ? '0' : widthList[index]?.margin
           }" [ngClass]="{'onDrop' : droppedItems[index]?.showDropAnimation}">
-            <div   [ngStyle]="getStyles(index)" [ngStyle]="{'background': droppedItems[index]?.title ? colors[index] : '', 'color': '#fff'}" style="border: 2px dashed rgb(204, 204, 204); width: 70px; margin: auto 0px; height: 70px; text-align: center; padding-top: 24px;">
-              {{index +1}}
+            <div [ngStyle]="getStyles(index)" 
+              [ngStyle]="{'background': droppedItems[index]?.title ? colors[index] : '', 'color': '#fff'}" 
+              style="border: 2px dashed rgb(204, 204, 204); width: 70px; margin: auto 0px; height: 70px; text-align: center; padding-top: 24px;">
+              {{index + 1}}
             </div>
-            <div class="drop-block"  [ngStyle]="getStyles(index)" cdkDropList (cdkDropListDropped)="drop2($event, index)">
-              <div class="dropped-item custom "  *ngIf="droppedItems[index]?.title">{{droppedItems[index]?.title}}</div>
-              <div  *ngIf="!droppedItems[index]?.title" >
+            <div class="drop-block" [ngStyle]="getStyles(index)" cdkDropList (cdkDropListDropped)="drop2($event, index)">
+              <div class="dropped-item custom" *ngIf="droppedItems[index]?.title">{{droppedItems[index]?.title}}</div>
+              <div *ngIf="!droppedItems[index]?.title">
                 <div class="drop-placeholder">
-                  <span  *ngIf="index == completed">
-                    Drop here
-                  </span>
+                  <span *ngIf="index == completed">Drop here</span>
                   <ion-img src="./assets/images/lock.png" *ngIf="index !== completed" style="width: 50px;"/>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div style="display: flex; justify-content: center;" *ngIf="!timelineItems?.length">
+          <ion-button (click)="goBack()" style="font-size: 24px;">
+            <ion-icon name="arrow-back"></ion-icon> Domains page
+          </ion-button>
+        </div>
       </div>
     </ion-col>
   </ion-row>
-
+  
   <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble" (completed)="speechOver()" (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
   <app-avatar [speechText]="" *ngIf="!showSpeechBubble" (completed)="speechOver()"  (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
 

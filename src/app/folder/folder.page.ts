@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { SubDomainComponent } from './sub-domain/sub-domain.component';
 import { Location } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ConfirmationComponent } from '../shared/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-folder',
@@ -66,8 +67,6 @@ export class FolderPage implements OnInit {
   onSelect(type :any){
     if(type === "yes"){
       this.talkOver();
-    }else{
-      // route
     }
   }
   ngOnInit() {
@@ -87,6 +86,7 @@ export class FolderPage implements OnInit {
     this.imagesPerCategory = Math.ceil(8 / this.categories.length);
     const completed = this.categories.filter(category => category.isCompleted);
       if(completed?.length){
+        this.categoriesCompleted = completed?.length;
         this.speechText ="Thanks for helping us to improve our school by sorting the improvement projects."
         this.text=[];
         setTimeout(() =>{
@@ -102,12 +102,34 @@ export class FolderPage implements OnInit {
 
   navigateToProject(index:any){
     this.showSpeechBubble = false;
-    if(this.categories[index]?.subDomain?.length){
-      this.showSubDomainModal(index,this.categories[index]?.subDomain);
+    if(this.categories[index]?.isCompleted){
+      this.replayConfirmation(index)
     }else{
-  localStorage.setItem('page2',"true");
-      this.router.navigate(["/new",index]);
+      if(this.categories[index]?.subDomain?.length){
+        this.showSubDomainModal(index,this.categories[index]?.subDomain);
+      }else{
+    localStorage.setItem('page2',"true");
+        this.router.navigate(["/projects",index]);
+      }
     }
+   
+  }
+
+  async replayConfirmation(index : number){
+    const modal = await this.modalController.create({
+      component: ConfirmationComponent,
+      componentProps: { title:"This category is already complete, do you want to replay?" }
+
+    });
+    await modal.present();
+
+  const { data: modalData, role } = await modal.onDidDismiss();
+  if (modalData) {
+    {
+      localStorage.setItem('page2',"true");
+        this.router.navigate(["/projects",index]);
+    }
+  }
   }
 
   async showSubDomainModal(index:any,data:any){
@@ -120,25 +142,28 @@ export class FolderPage implements OnInit {
   const { data: modalData, role } = await modal.onDidDismiss();
   if (modalData) {
     {
-      this.router.navigate(["/new",index],{
-        queryParams: { subDomain: modalData}      });
+      this.router.navigate(["/projects",index],{
+        queryParams: { subDomain: modalData}});
     }
   }
   }
 
 
   changeSchool(completed: any) {
-    this.categoriesCompleted++;
-    this.showProgress = true;
     for (let i = this.totalSteps; i <= this.imagesPerCategory * this.categoriesCompleted; i++) {
-      this.totalSteps++;
-      setTimeout(() => {
-        const currentImage = `./assets/images/school/${i}.png`;
-        const nextImage = `./assets/images/school/${i + 1}.png`;
-
-        this.applyKeyframeAnimation(currentImage, nextImage, i);
-        this.schoolImage = currentImage;
-      }, 800 * i);
+    console.log(this.imagesPerCategory, this.categoriesCompleted,this.totalSteps);
+      // if(this.totalSteps <= this.imagesPerCategory){
+        this.showProgress = true;
+        this.totalSteps++;
+        setTimeout(() => {
+          const currentImage = `./assets/images/school/${i}.png`;
+          const nextImage = `./assets/images/school/${i + 1}.png`;
+          this.applyKeyframeAnimation(currentImage, nextImage, i);
+          this.schoolImage = currentImage;
+        }, 800 * i);
+      // } else{
+      //   this.showProgress = false;
+      // }
     }
     if (this.totalSteps >= this.imagesPerCategory * this.categoriesCompleted) {
       setTimeout(() => {

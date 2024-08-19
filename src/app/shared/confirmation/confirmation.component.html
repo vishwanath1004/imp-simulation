@@ -1,0 +1,22 @@
+<div style="background-image: url(./assets/images/bg31.png); background-size: cover;     height: 100%;">
+  <div style=" display: flex;
+  justify-content: end;
+  margin: 15px; ">
+    <ion-icon name="close"  class="backIcon" style="background-color:#d3cdbb;" (click)="dismiss()"/>
+    </div>
+    <ion-card class="card-css" style="height: auto; margin-top: 15%;">
+      <ion-card-header>
+        <ion-card-title style="  text-align: center;     color: darkgoldenrod;">
+          {{title}}
+          </ion-card-title>
+          <ion-card-content  style="text-align: right;">
+            <ion-button color="primary" (click)="action(true)" style="width: 100px;">
+              Yes
+              </ion-button>
+              <ion-button  color="medium"  (click)="action(false)" style="width: 100px;">
+                No
+              </ion-button>
+            </ion-card-content>
+      </ion-card-header>
+      </ion-card>
+  </div>

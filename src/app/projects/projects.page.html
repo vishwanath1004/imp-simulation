@@ -1,210 +1,94 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" style="background-color: #fff;">
-  <!-- <app-celebration *ngIf="completed == timelineItems?.length"  [message]="'You sorted all the  improvement projects.'">
-    </app-celebration> -->
-  <div class="topbar">
-    <div style="padding: 15px;" [ngClass]="{'highlight' : count == 5}">
-      Attempts: {{attempts}}
-      </div>
-      <div style="padding: 15px;" [ngClass]="{'highlight' : count == 6}">
-        In order: {{completed}} / {{timelineItems.length}}
-        </div>
-        <div style="padding: 15px; cursor: pointer;" [ngClass]="{'highlight' : count == 7}" (click)="showHint()">
-         Hint 
-          </div>
-    </div>
-  <div class="container" *ngIf="type === 1">
-    <div class="items-list" cdkDropListGroup >
-      <div class="left-list " cdkDropList  [ngClass]="{'highlight': count == 1}">
-  <div class="item" *ngFor="let item of timelineItems; let i = index" cdkDrag  [ngClass]="{'item-drag' :  count == 3 && i == 0}" [ngStyle]="item?.isCompleted ? {'background': '#2196F3', 'color': '#fff'} : {}"
-  [ngClass]="{'hintOption' : item.hint}" >
-  {{item?.title}}
-  <ion-img src="../../assets/images/handPoint.png" *ngIf="count == 3 && i == 0"  style="rotate:-32deg; width: 70px;"/>
-  </div>
-</div>
-      <div class="right-list" [ngClass]="{'highlight': count == 2}">
-        <div class="drop-block" *ngFor="let item of timelineItems; let i = index" cdkDropList (cdkDropListDropped)="drop1($event, i)"  [ngClass]="{'hintOption' : result[i]?.hint}" [ngStyle]="droppedItems[i] ? {'background': '#2196F3', 'color': '#fff'} : {}" >
-          <div class="drop-placeholder" *ngIf="!droppedItems[i]" >Drop here</div>
-          <div class="dropped-item" *ngIf="droppedItems[i]" [@dropAnimation]="dropAnimationState" >{{droppedItems[i]?.title}} </div>
-        </div>
-      </div>
-    </div>
+<ion-content class="bg">
+  <div style="display: flex; height: 80px; padding: 10px;" >
+    <ion-icon (click)="goBack()" name="arrow-back" class="backIcon"></ion-icon>
+    <h1 class="text-deco custom"> Sort the Improvement projects</h1>
   </div>
 
-
-
-  <div *ngIf="type === 2">
-    <ion-button (click)="showShiningFish=true" >Complete </ion-button>
-
-    <div class="cards-container">
-    <ion-card *ngFor="let item of result; let i = index" (dragover)="onDragOver($event)" (drop)="onDrop($event, i)">
-      <ion-img *ngIf="draggedItems[result?.length - (i + 1)]?.title" class="correct" src="../../assets/images/water.gif" style="width: 100px; height: 100px;" />
-      <ion-img *ngIf="!draggedItems[result?.length - (i + 1)]?.title" src="../../assets/images/water.gif" style="width: 100px;" />
-     </ion-card>
-     </div>
-
-    <div style="display: flex; justify-content: center;">
-      <div style=" 
-      color: black;
-      display: flex;
-      width: 100px;
-   ">
-      <div class="progress-container">
-        <ion-progress-bar class="progress-bar" [style.height.%]="progress"></ion-progress-bar>
-      </div>
-      </div>
-      <!-- <div class="container1">
-
-
-        <div class="triangle">
-          <div class="drop-target">
-            <div *ngFor="let item of result; let i = index" class="drop-target-item" (dragover)="onDragOver($event)" (drop)="onDrop($event, i)">
-              <span *ngIf="draggedItems[result?.length - (i + 1)]?.title" class="correct">{{result?.length - (i + 1)}}</span>
-              <span *ngIf="!draggedItems[result?.length - (i + 1)]?.title" style="font-size: 14px;">Drop here </span>
+  <ion-row cdkDropListGroup class="container-card">
+    <ion-col size="12" size-lg="5.5" class="left-class ion-padding-end" style="padding-right: 15px;"
+      [ngClass]="{'collapse' : timelineItems?.length === 0}">
+      <ion-row cdkDropList *ngIf="timelineItems?.length" style="margin-right: 20px;">
+        <ion-col size="12" *ngFor="let item of timelineItems; let i = index">
+          <ion-card class="card-css" style="display: flex; height: auto; min-height: 100px;"
+              cdkDrag 
+              (cdkDragStarted)="onDragStart($event, item)" 
+              (cdkDragEnded)="onDragOver($event,item)"
+              [ngStyle]="item?.isCompleted ? {'background': '#2196F3', 'color': '#fff'} : {}"
+              [ngClass]="{
+                'highlight': !speechStop && count == 1,
+                'flipped': !speechStop && count == 1,
+                'item-drag': !speechStop && count == 3 && i == 0,
+              }">
+            <div style="width: 90%; display: flex; align-items: center;">
+              <div class="shine"></div>
+              <div style="width: 93%; text-align: center; color: darkgoldenrod; text-shadow: 1px 2px #000;">
+                {{item?.title}}
+              </div>
             </div>
-          </div>
-        </div>
-      </div> -->
-
-     
-   
-
-          <!-- <div class="top-fin" ></div>
-          <div class="fish-body" ></div>
-          <div class="tail-fin" ></div>
-          <div class="side-fin" ></div>
-          <div class="scale scale-1"></div>
-          <div class="scale scale-2"></div>
-          <div class="scale scale-3"></div> -->
-
-
-
-      <div id="fish-tank">
-        <div id="water" [style.height.%]="waterLevel"></div>
-        <div class="fish">
-          <ion-img *ngIf="!showShiningFish" src="../../assets/images/fish.gif" [ngStyle]="{'width.px': fishWidth}" />
-          <ion-img *ngIf="showShiningFish" src="../../assets/images/completedFish.gif" [ngStyle]="{'width.px': fishWidth}" />
-
-
-          <!-- <div class="top-fin" ></div>
-          <div class="fish-body" ></div>
-          <div class="tail-fin" ></div>
-          <div class="side-fin" ></div>
-          <div class="scale scale-1"></div>
-          <div class="scale scale-2"></div>
-          <div class="scale scale-3"></div> -->
-
-        </div>
-      </div> 
-    </div>
-    <div class="cards-container">
-      <ion-card *ngFor="let item of timelineItems" draggable="true"  [ngClass]="{'dropped-overlay' : item?.dropped} ">
-        <div >
-        {{item?.title}}  <span *ngIf="item?.dropped" style="margin: 15px;"><ion-icon style="font-size: 30px;
-          position: fixed;
-          background: green;
-          border-radius: 50%;
-          margin: -5px;" name="checkmark-circle-outline"></ion-icon> </span>
-        </div>
-      </ion-card>
-    </div>
-  </div>
-
-
-
-  <!-- <div id="fish-tank">
-    <div id="water"></div>
-    <div class="fish" [ngStyle]="{'bottom.%': fishBottom}">
-        <div class="top-fin" [ngStyle]="{'width.%': topFin.width, 'height.%': topFin.height, 'bottom.%' : topFin.top }"></div>
-        <div class="fish-body" [ngStyle]="{'width.%': fishWidth, 'height.%': fishHeight}">
-        <div class="tail-fin" [ngStyle]="{'width.%': tailFin.width, 'height.%': tailFin.height, 'bottom.%' : tailFin.bottom }"></div>
-        <div class="side-fin"  [ngStyle]="{'bottom.%': sideFin.bottom,'width.%': sideFin.width,'height.%': sideFin.height, 'left.%': sideFin.left}"></div>
-        <div class="scale scale-1" [ngStyle]="{'bottom.%': scale1.bottom, 'left.%': scale1.left}"></div>
-        <div class="scale scale-2"  [ngStyle]="{'bottom.%': scale2.bottom, 'left.%': scale2.left}"></div>
-        <div class="scale scale-3"  [ngStyle]="{'bottom.%': scale3.bottom, 'left.%': scale3.left}"></div>
-    </div>
-</div>
-</div> -->
-
-
-
-
-<!-- <div id="fish-tank">
-  <div id="water" [style.height]="waterLevel + '%'"></div>
-  <div class="fish" [ngStyle]="{'bottom.px': fishBottom, 'width.px': fishWidth, 'height.px': fishHeight}">
-    <div class="top-fin" [ngStyle]="{'width.px': topFin.width, 'height.px': topFin.height, 'top.px': topFin.top}"></div>
-    <div class="fish-body" [ngStyle]="{'width.%': 100, 'height.%': 60}">
-      <div class="fish-eye" [ngStyle]="{'width.px': 5, 'height.px': 5, 'right.px': fishEye.right, 'top.px': fishEye.top, 'background-color': '#ffffff'}"></div>
-      <div class="fish-pupil" [ngStyle]="{'width.px': 3, 'height.px': 4, 'right.px': fishPupil.right, 'top.px': fishPupil.top, 'background-color': '#000000'}"></div>
-    </div>
-    <div class="tail-fin" [ngStyle]="{'width.px': tailFin.width, 'height.px': tailFin.height, 'bottom.px': tailFin.bottom}"></div>
-    <div class="side-fin" [ngStyle]="{'width.%': 30, 'height.%': 40}"></div>
-    <div class="scale scale-1" [ngStyle]="{'width.%': 20, 'height.%': 24, 'bottom.px': scale1.bottom, 'left.px': scale1.left}"></div>
-    <div class="scale scale-2" [ngStyle]="{'width.%': 20, 'height.%': 24, 'bottom.px': scale2.bottom, 'left.px': scale2.left}"></div>
-    <div class="scale scale-3" [ngStyle]="{'width.%': 20, 'height.%': 24, 'bottom.px': scale3.bottom, 'left.px': scale3.left}"></div>
-  </div>
-</div> -->
-
-
-  <!-- <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble" (completed)="speechOver()"></app-avatar> -->
-
-  <div class="container" *ngIf="type === 3">
-    <div class="items-list" cdkDropListGroup>
-      <div class="left-list" cdkDropList [ngClass]="{'highlight': count == 1}" *ngIf="completed  != result?.length">
-        <div class="item" *ngFor="let item of timelineItems; let i = index" cdkDrag 
-             [ngClass]="{'item-drag' : count == 3 && i == 0}" 
-             [ngStyle]="item?.isCompleted ? {'background': '#2196F3', 'color': '#fff'} : {}" 
-             [ngClass]="{'hintOption' : item.hint}">
-          {{item?.title}}
-          <ion-img src="../../assets/images/handPoint.png" *ngIf="count == 3 && i == 0" style="rotate:-32deg; width: 70px;"/>
-        </div>
-      </div>
-      <div class="right-list" [ngClass]="{'highlight': count == 2}" style="display: flex; justify-content: end;" [ngClass]="{'move-righttoleft' : completed === result?.length}">
-        <div class="drop-block" *ngIf="droppedItems?.length != result?.length" cdkDropList (cdkDropListDropped)="drop2($event)">
-          <div class="drop-placeholder" cdkDropList>Drop here</div>
-        </div>
-        <div *ngIf="completed  == result?.length" style="display: flex; justify-content: center;">
-          <ion-img src="../../assets/images/source.gif" style="width: 100px;" class="crown" />
-         
-          </div>
-        <div *ngFor="let item of droppedItems; let i = index">
-          <div style="display: flex;" 
-               [ngClass]="{'hintOption' : result[i]?.hint}" 
-               [ngStyle]="{
-                 'width': droppedItems.length - (i+1) == 0 ? '100%' : widthList[droppedItems.length - (i+1)].width, 
-                 'margin': droppedItems.length - (i+1) == 0 ? '0' : widthList[droppedItems.length - (i+1)].margin
-               }">
-            <div [ngStyle]="{'background': colors[droppedItems.length - (i+1)], 'color': '#fff'}" 
-                 style="border: 2px dashed rgb(204, 204, 204); width: 100px; margin: auto 0px; height: 70px; text-align: center; padding-top: 24px;">
-                 {{droppedItems.length - i}}
-            </div> 
-            <div class="drop-block" [ngStyle]="{'background': colors[droppedItems.length - (i+1)], 'color': '#fff'}" >
-              <div class="dropped-item">{{droppedItems[droppedItems.length - (i+1)]?.title}} {{droppedItems.length - (i+1)}}</div>
+            <div class="bottom-label" (click)="openDetail(item)" style="width: 10%;">
+              <ion-img src="./assets/images/more.png" style="width: 60px;" />
+              <div>View more</div>
             </div>
-          </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      
+      <div *ngIf="!timelineItems?.length">
+        <div class="congrats-text purples">
+          Congratulations
         </div>
-        <!-- <div>
-          <ion-img src="../../assets/images/paperBlast.gif" style="width: 100px;" />
-          </div> -->
-      </div>
-      <div style="color: black; display: flex; width: 100px; margin: 10px 0;" *ngIf="completed  != result?.length">
-        <div class="progress-container">
-          <ion-progress-bar class="progress-bar" [style.height.%]="progress"></ion-progress-bar>
+        <div class="congrats-text purples" style="top: 12rem; font-size: 36px; text-align: center;">
+          You sorted all given Improvement projects
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <ion-img src="./assets/images/firework.gif" style="width: 207px; position: relative; top: 39px;"/>
+          <ion-img src="./assets/images/firework.gif" style="width: 207px; position: relative; top: 39px;"/>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top:100px">
+          <ion-img src="./assets/images/childrenCelebration.gif" style="transform: rotateY(180deg);" />
+          <ion-img src="./assets/images/childrenCelebration.gif"/>
         </div>
       </div>
-    </div>
-  </div>
+    </ion-col>
   
+    <ion-col size="12" size-lg="5.5"  class="drop-area right-list ion-padding-start" 
+      style="background-image: url(./assets/images/bg31.png); background-size: cover; display: flex; flex-direction: column-reverse;" 
+      [ngClass]="{'highlight':!speechStop && count == 2 }">
+      <div style="margin: 20px;">
+        <div *ngIf="completed == result?.length" style="display: flex; justify-content: center;">
+          <ion-img src="./assets/images/source.gif" style="width: 100px;" class="crown"></ion-img>
+        </div>
+        <div *ngFor="let index of getReverseIndices(result.length)">
+          <div style="display: flex;" [ngStyle]="{
+            'width': index == 0 ? '100%' : widthList[index]?.width,
+            'margin': index == 0 ? '0' : widthList[index]?.margin
+          }" [ngClass]="{'onDrop' : droppedItems[index]?.showDropAnimation}">
+            <div [ngStyle]="getStyles(index)" 
+              [ngStyle]="{'background': droppedItems[index]?.title ? colors[index] : '', 'color': '#fff'}" 
+              style="border: 2px dashed rgb(204, 204, 204); width: 70px; margin: auto 0px; height: 70px; text-align: center; padding-top: 24px;">
+              {{index + 1}}
+            </div>
+            <div class="drop-block" [ngStyle]="getStyles(index)" cdkDropList (cdkDropListDropped)="drop2($event, index)">
+              <div class="dropped-item custom" *ngIf="droppedItems[index]?.title">{{droppedItems[index]?.title}}</div>
+              <div *ngIf="!droppedItems[index]?.title">
+                <div class="drop-placeholder">
+                  <span *ngIf="index == completed">Drop here</span>
+                  <ion-img src="./assets/images/lock.png" *ngIf="index !== completed" style="width: 50px;"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="!timelineItems?.length">
+          <ion-button (click)="goBack()" style="font-size: 24px;">
+            <ion-icon name="arrow-back"></ion-icon> Domains page
+          </ion-button>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  
+  <app-avatar [speechText]="speechText" *ngIf="showSpeechBubble" (completed)="speechOver()" (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
+  <app-avatar [speechText]="" *ngIf="!showSpeechBubble" (completed)="speechOver()"  (resumeSpeech)="resumeSpeech()" (stopSpeech)="stopSpeech()"></app-avatar>
+
 </ion-content>
-
-
-
-
-
